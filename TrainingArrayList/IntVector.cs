@@ -61,6 +61,7 @@ namespace TrainingIntVector
             }
             else if (length > capacity)
             {
+                //11
                 NewArray();
                 arr[arr.Length - 1] = num;
             }
