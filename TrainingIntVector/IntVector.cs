@@ -12,6 +12,7 @@
             get { return _arr[i]; }
             set { _arr[i] = value; }
         }
+
         public IntVector()
         {
             _arr = new int[_defaultCapacity];
@@ -23,8 +24,8 @@
             int result = (int)Math.Ceiling((double)length / 4);
             switch (length)
             {
-                case <= 4: capacity = 4; break;
-                case > 4: capacity = result*_defaultCapacity; break;
+                case <= 4: capacity = _defaultCapacity; break;
+                case > 4: capacity = result * _defaultCapacity; break;
             }
             _arr = new int[capacity];
 
@@ -66,6 +67,7 @@
             capacity *= 2;
             _arr = new int[capacity];
             int i = 0;
+
             foreach (int valueArr in tempArr)
             {
                 _arr[i] = valueArr;
@@ -113,9 +115,9 @@
 
         public void Clear()
         {
-            _arr = new int[4];
+            _arr = new int[_defaultCapacity];
             length = 0;
-            capacity = 4;
+            capacity = _defaultCapacity;
         }
     }
 }
