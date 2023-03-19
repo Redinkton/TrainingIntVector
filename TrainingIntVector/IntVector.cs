@@ -5,7 +5,8 @@ namespace TrainingIntVector
     public class IntVector
     {
         int length = 0;
-        int capacity = 4;
+        int capacity;
+        private const int _defaultCapacity = 4;
         private int[] _arr;
 
         public int this[int i]
@@ -15,17 +16,17 @@ namespace TrainingIntVector
         }
         public IntVector()
         {
-            _arr = new int[4];
+            _arr = new int[_defaultCapacity];
         }
 
         public IntVector(int[] arr)
         {
             length = arr.Length;
-            double result = length / 4;
+            int result = (int)Math.Ceiling((double)length / 4);
             switch (length)
             {
                 case <= 4: capacity = 4; break;
-                case > 4: capacity = (int)Math.Ceiling(result); break;
+                case > 4: capacity = result*_defaultCapacity; break;
             }
             _arr = new int[capacity];
 
@@ -101,7 +102,10 @@ namespace TrainingIntVector
             foreach (int valueArr in _arr)
             {
                 if (valueArr == value)
+                {
+                    length--;
                     continue;
+                }
 
                 tempArr[i] = valueArr;
                 i++;
