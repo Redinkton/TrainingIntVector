@@ -1,10 +1,8 @@
-﻿using System.Collections;
-
-namespace TrainingIntVector
+﻿namespace TrainingIntVector
 {
     public class IntVector
     {
-        int length = 0;
+        int length;
         int capacity;
         private const int _defaultCapacity = 4;
         private int[] _arr;
