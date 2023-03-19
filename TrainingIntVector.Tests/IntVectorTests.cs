@@ -49,7 +49,7 @@ namespace TrainingIntVector.Tests
         }
 
         [TestMethod]
-        public void ClearAllElements()
+        public void Clear()
         {
             // Arrange
             int expected = 0;
