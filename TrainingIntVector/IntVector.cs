@@ -2,8 +2,8 @@
 {
     public class IntVector
     {
-        int length;
-        int capacity;
+        private int _length;
+        private int _capacity;
         private const int _defaultCapacity = 4;
         private int[] _arr;
 
@@ -20,16 +20,16 @@
 
         public IntVector(int[] arr)
         {
-            length = arr.Length;
-            int result = (int)Math.Ceiling((double)length / 4);
-            switch (length)
+            _length = arr.Length;
+            int result = (int)Math.Ceiling((double)_length / 4);
+            switch (_length)
             {
-                case <= 4: capacity = _defaultCapacity; break;
-                case > 4: capacity = result * _defaultCapacity; break;
+                case <= 4: _capacity = _defaultCapacity; break;
+                case > 4: _capacity = result * _defaultCapacity; break;
             }
-            _arr = new int[capacity];
+            _arr = new int[_capacity];
 
-            for(int i = 0; i < length; i++)
+            for(int i = 0; i < _length; i++)
             {
                 _arr[i] = arr[i];
             }
@@ -37,47 +37,55 @@
 
         public void AddNewElement(int num)
         {
-            if (length == capacity)
+            if (_length == _capacity)
             {
-                CopyOldAndCrateNewArray();
-                _arr[length] = num;
-                length++;
+                CopyArray();
+                _arr[_length] = num;
+                _length++;
             }
-            else if (length < capacity)
+            else if (_length < _capacity)
             {
-                _arr[length] = num;
-                length++;
+                _arr[_length] = num;
+                _length++;
+            }
+            else
+            {
+                throw new Exception("ERROR");
             }
         }
 
         public int ReturnCapacity()
         {
-            return capacity;
+            return _capacity;
         }
 
         public int ReturnLength()
         {
-            return length;
+            return _length;
         }
 
-        // с названием мог переборщить :)
-        public void CopyOldAndCrateNewArray()
+        public void CopyArray()
         {
-            int[] tempArr = _arr;
-            capacity *= 2;
-            _arr = new int[capacity];
+            _capacity *= 2;
+            _arr = ExtendArray(_arr, _capacity);
+        }
+
+        public int[] ExtendArray(int[] oldArray, int newCapacity)
+        {
+            int[] newArray = new int[_capacity];
             int i = 0;
 
-            foreach (int valueArr in tempArr)
+            foreach (int valueArr in oldArray)
             {
-                _arr[i] = valueArr;
+                newArray[i] = valueArr;
                 i++;
             }
+            return newArray;
         }
 
         public void RemoveAt(int index)
         {
-            int[] tempArr = new int[capacity];
+            int[] tempArr = new int[_capacity];
             int f = 0;
             for (int i = 0; i < tempArr.Length; i++)
             {
@@ -91,19 +99,19 @@
                     f++;
                 }
             }
-            length--;
+            _length--;
             _arr = tempArr;
         }
 
         public void RemoveAllThisInstances(int value)
         {
-            int[] tempArr = new int[capacity];
+            int[] tempArr = new int[_capacity];
             int i = 0;
             foreach (int valueArr in _arr)
             {
                 if (valueArr == value)
                 {
-                    length--;
+                    _length--;
                     continue;
                 }
 
@@ -116,8 +124,8 @@
         public void Clear()
         {
             _arr = new int[_defaultCapacity];
-            length = 0;
-            capacity = _defaultCapacity;
+            _length = 0;
+            _capacity = _defaultCapacity;
         }
     }
 }

@@ -62,5 +62,20 @@ namespace TrainingIntVector.Tests
             int actual = intVector.ReturnLength();
             Assert.AreEqual(expected, actual, "Correctly");
         }
+
+        [TestMethod]
+        public void EditOneElement()
+        {
+            // Arrange
+            int expected = 1;
+            IntVector intVector = new IntVector(new int[] { 24, 5, 13, 4, 5, 99, 5 });
+
+            // Act
+            intVector[0]=1;
+
+            // Assert
+            int actual = intVector[0];
+            Assert.AreEqual(expected, actual, "Correctly");
+        }
     }
 }
