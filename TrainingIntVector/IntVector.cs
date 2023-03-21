@@ -16,6 +16,7 @@
         public IntVector()
         {
             _arr = new int[_defaultCapacity];
+            _capacity = _defaultCapacity;
         }
 
         public IntVector(int[] arr)
@@ -70,7 +71,7 @@
             _arr = ExtendArray(_arr, _capacity);
         }
 
-        public int[] ExtendArray(int[] oldArray, int newCapacity)
+        private int[] ExtendArray(int[] oldArray, int newCapacity)
         {
             int[] newArray = new int[_capacity];
             int i = 0;
@@ -89,7 +90,7 @@
             int f = 0;
             for (int i = 0; i < tempArr.Length; i++)
             {
-                if (_arr[i] == index)
+                if (i== index)
                 {
                     continue;
                 }
@@ -126,6 +127,11 @@
             _arr = new int[_defaultCapacity];
             _length = 0;
             _capacity = _defaultCapacity;
+        }
+
+        public void AddAtIndex(int index, int value)
+        {
+            _arr[index] = value;
         }
     }
 }
