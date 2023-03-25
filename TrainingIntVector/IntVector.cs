@@ -1,10 +1,21 @@
-﻿namespace TrainingIntVector
+﻿using System.Collections;
+using System.Xml.Linq;
+
+namespace TrainingIntVector
 {
     public class IntVector
     {
         private int _length;
+        public int Length => _length;
+
         private int _capacity;
         private const int _defaultCapacity = 4;
+        public int Capacity
+        {
+            get => _capacity;
+            set => _capacity = value;
+        }
+
         private int[] _arr;
 
         public int this[int i]
@@ -22,12 +33,9 @@
         public IntVector(int[] arr)
         {
             _length = arr.Length;
+
             int result = (int)Math.Ceiling((double)_length / 4);
-            switch (_length)
-            {
-                case <= 4: _capacity = _defaultCapacity; break;
-                case > 4: _capacity = result * _defaultCapacity; break;
-            }
+            _capacity = _length <= 4 ? _defaultCapacity : result * _defaultCapacity;
             _arr = new int[_capacity];
 
             for(int i = 0; i < _length; i++)
@@ -55,17 +63,7 @@
             }
         }
 
-        public int ReturnCapacity()
-        {
-            return _capacity;
-        }
-
-        public int ReturnLength()
-        {
-            return _length;
-        }
-
-        public void CopyArray()
+        private void CopyArray()
         {
             _capacity *= 2;
             _arr = ExtendArray(_arr, _capacity);
@@ -73,7 +71,7 @@
 
         private int[] ExtendArray(int[] oldArray, int newCapacity)
         {
-            int[] newArray = new int[_capacity];
+            int[] newArray = new int[newCapacity];
             int i = 0;
 
             foreach (int valueArr in oldArray)
