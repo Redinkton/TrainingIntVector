@@ -13,7 +13,6 @@ namespace TrainingIntVector
         public int Capacity
         {
             get => _capacity;
-            set => _capacity = value;
         }
 
         private int[] _arr;
